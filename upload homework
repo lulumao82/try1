@@ -1,0 +1,31 @@
+import pytest
+from Calculator import Calculator
+
+class Test_Cal:
+    def setup_class(self):
+        self.cal = Calculator.Calculator()
+        print("Testing start now")
+
+    def teardown_class(self):
+        print("Testing complete")
+
+    @pytest.mark.parametrize(("a","b","result"),[(1,2,3),(3000,4000,7000)],ids=["int","bigint"])
+    def test_add(self, a, b, result):
+        actual = self.cal.add(a, b)
+        assert actual == result
+
+    @pytest.mark.parametrize(("a", "b", "result"), [(3,2,1), (6000,4000,2000)])
+    def test_minus(self, a, b, result):
+        actual = self.cal.minus(a, b)
+        assert actual == result
+
+    @pytest.mark.parametrize(("a", "b", "result"), [(3, 2, 6), (6, 4, 24)])
+    def test_multiple(self, a, b, result):
+        actual = self.cal.multiple(a, b)
+        assert actual == result
+
+    @pytest.mark.parametrize(("a", "b", "result"), [(6, 2, 3), (24, 4, 6)])
+    def test_div(self, a, b, result):
+        actual = self.cal.div(a, b)
+        assert actual == result
+
